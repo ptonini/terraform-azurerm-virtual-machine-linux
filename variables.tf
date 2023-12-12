@@ -41,10 +41,6 @@ variable "size" {
   default = "Standard_B1s"
 }
 
-variable "source_image_reference" {
-  default = null
-}
-
 variable "os_disk_size_gb" {
   default = 30
 }
@@ -53,7 +49,21 @@ variable "source_image_id" {
   default = null
 }
 
+variable "source_image_reference" {
+  type = object({
+    publisher = string
+    offer     = string
+    sku       = string
+    version   = string
+  })
+}
+
 variable "plan" {
+  type = object({
+    name      = string
+    product   = string
+    publisher = string
+  })
   default = null
 }
 
@@ -104,7 +114,7 @@ variable "extensions" {
   type = map(object({
     publisher                  = string
     type                       = string
-    auto_upgrade_minor_version = optional(bool, true)
+    auto_upgrade_minor_version = bool
     type_handler_version       = string
     settings                   = optional(string)
     protected_settings         = optional(string)
