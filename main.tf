@@ -1,6 +1,6 @@
 module "requirements" {
   source        = "ptonini/vm-requirements/azurerm"
-  version       = "~> 1.0.0"
+  version       = "~> 1.0.1"
   name          = var.name
   host_count    = var.host_count
   subnet_id     = var.subnet_id
@@ -78,7 +78,7 @@ resource "azurerm_linux_virtual_machine" "this" {
 
 module "dependants" {
   source             = "ptonini/vm-dependants/azurerm"
-  version            = "~> 1.0.0"
+  version            = "~> 1.0.1"
   count              = var.host_count
   rg                 = var.rg
   virtual_machine_id = azurerm_linux_virtual_machine.this[count.index].id
